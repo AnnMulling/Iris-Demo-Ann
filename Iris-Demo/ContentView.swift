@@ -77,6 +77,7 @@ struct ContentView: View {
                 }
                 
                 LazyHStack(spacing: 10) {
+                    /* Notification Button*/
                     Button(action : {
                         print("notification")
                     }) {
@@ -86,6 +87,29 @@ struct ContentView: View {
                             .foregroundColor(.red.opacity(0.8))
                             Text("Notification")
                                 .foregroundStyle(.black)
+                                .font(.subheadline)
+                        }
+                        .padding()
+                        .frame(width: .infinity, height: 44)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 7)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                        .background(Color.gray.opacity(0.1))
+                        
+                    }
+                    
+                /* Star Button */
+                    Button(action : {
+                        print("notification")
+                    }) {
+                        HStack {
+                            Image(systemName: "bookmark.fill"
+                            )
+                            .foregroundColor(.gray.opacity(0.5))
+                            Spacer()
+                            Text("8")
+                                .foregroundStyle(.gray)
                                 .font(.subheadline)
                         }
                         .padding()
