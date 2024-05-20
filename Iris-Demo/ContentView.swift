@@ -7,54 +7,106 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
-    private let costumes = ["image 4",
-                            "image 5",
-                            "image 8",
-                            "image 10",
-                            "image 13"]
+    
+    struct Costume {
+        var id: UUID
+        var name: String
+    }
+    
+    let costumes = [
+                    Costume(id: UUID(), name: "image 4"),
+                    Costume(id: UUID(), name: "image 5"),
+                    Costume(id: UUID(), name: "image 8"),
+                    Costume(id: UUID(), name: "image 10"),
+                    Costume(id: UUID(), name: "image 13")
+                    ]
     
     var body: some View {
-      
-        VStack {
-            /* navigation bar*/
-            HStack(alignment: .center) {
-               Image(systemName: "line.horizontal.3")
-                   .foregroundColor(.purple)
-                   .imageScale(.large)
-               Text("Home")
-                   .foregroundColor(.purple)
-               Spacer()
-               Image(systemName: "gearshape")
-                   .foregroundColor(.purple)
-                   .imageScale(.large)
-                   .foregroundStyle(.tint)
-               
-            }
-            
-            /* carousel */
-            ScrollView(.horizontal) {
-                LazyHStack(spacing: 0) {
-                    ForEach(costumes, id: \.self) { costume in
-                        
-                        Image(costume)
+        
+        ScrollView(.vertical){
+         
+            LazyVStack {
+                /* navigation bar*/
+                HStack(alignment: .center) {
+                   Image(systemName: "line.horizontal.3")
+                       .foregroundColor(.purple)
+                       .imageScale(.large)
+                   Text("Home")
+                       .foregroundColor(.purple)
+                   Spacer()
+                   Image(systemName: "gearshape")
+                       .foregroundColor(.purple)
+                       .imageScale(.large)
+                       .foregroundStyle(.tint)
+                   
+                }
+                
+                /* carousel */
+                ScrollView(.horizontal) {
+                    LazyHStack(spacing: 10) {
+                            ForEach(costumes, id: \.id) { costume in
                             
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: 100)
-                          
-                            .background(Color(.white))
-                            .padding(.horizontal, 20)
+                                VStack(alignment: .center, spacing: 10) {
+                                    Spacer()
+                                    Image(costume.name)
+                                        .resizable()
+                                        .scaledToFill()
+//                                        .background(Color(.white))
+                                        .frame(width: 125, height: 120)
+                                        .padding()
+                                    Spacer()
+                                    Text("\(costume.name)")
+                                        .font(.subheadline)
+                                        .foregroundColor(Color(.gray))
+                                        .fontWeight(.medium)
+  
+                                }
+                                /*gray frame*/
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.gray, lineWidth: 0.5)
+                                        
+                                )
+                                .padding(2)
+                            }
+                    }
+                    
+                    .padding(5)
+                }
+                
+                LazyHStack(spacing: 10) {
+                    Button(action : {
+                        print("notification")
+                    }) {
+                        HStack {
+                            Image(systemName: "exclamationmark.circle.fill"
+                            )
+                            .foregroundColor(.red.opacity(0.8))
+                            Text("Notification")
+                                .foregroundStyle(.black)
+                                .font(.subheadline)
+                        }
+                        .padding()
+                        .frame(width: .infinity, height: 44)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 7)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                        .background(Color.gray.opacity(0.1))
                         
                     }
                 }
-            }
-           
-       }
-        .padding(.all)
-               
            }
-        
+            
+            .padding(.all)
+                   
+               }
+            
+        }
+   
+       
 }
 
 #Preview {
