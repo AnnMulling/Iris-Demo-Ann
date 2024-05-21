@@ -15,6 +15,12 @@ struct ContentView: View {
         var name: String
     }
     
+    /* Color Schemes */
+    let lightPurple = Color(red: 176/255, green: 166/255, blue: 203/255, opacity: 1.0)
+    let purple = Color(red: 97/255, green: 77/255, blue: 150/255, opacity: 1.0)
+    let pastelPurple = Color(red: 136/255, green: 121/255, blue: 176/255, opacity: 0.1)
+    
+    /* Images */
     let costumes = [
                     Costume(id: UUID(), name: "image 4"),
                     Costume(id: UUID(), name: "image 5"),
@@ -27,40 +33,49 @@ struct ContentView: View {
         
         ScrollView(.vertical){
          
-            LazyVStack {
+            LazyVStack(spacing: 20) {
                 /* navigation bar*/
+               
                 HStack(alignment: .center) {
                    Image(systemName: "line.horizontal.3")
-                       .foregroundColor(.purple)
+                       .foregroundColor(purple)
                        .imageScale(.large)
                    Text("Home")
-                       .foregroundColor(.purple)
+                       .foregroundColor(purple)
                    Spacer()
                    Image(systemName: "gearshape")
-                       .foregroundColor(.purple)
+                       .foregroundColor(purple)
                        .imageScale(.large)
                        .foregroundStyle(.tint)
-                   
                 }
+        
+                /* divider */
+                Rectangle()
+                    .fill(lightPurple)
+                    .frame(width: .infinity, height: 0.4, alignment: .center)
+                    .edgesIgnoringSafeArea(.all)
+                    
+            
                 
                 /* carousel */
                 ScrollView(.horizontal) {
-                    LazyHStack(spacing: 10) {
+                    LazyHStack(alignment: .center, spacing: 10) {
                             ForEach(costumes, id: \.id) { costume in
                             
-                                VStack(alignment: .center, spacing: 10) {
+                                VStack(alignment: .center, spacing: 5) {
                                     Spacer()
                                     Image(costume.name)
                                         .resizable()
                                         .scaledToFill()
 //                                        .background(Color(.white))
-                                        .frame(width: 125, height: 120)
+                                        .frame(width: 125, height: 110)
                                         .padding()
                                     Spacer()
                                     Text("\(costume.name)")
                                         .font(.subheadline)
                                         .foregroundColor(Color(.gray))
                                         .fontWeight(.medium)
+                                    Spacer()
   
                                 }
                                 /*gray frame*/
@@ -76,7 +91,15 @@ struct ContentView: View {
                     .padding(5)
                 }
                 
-                LazyHStack(spacing: 10) {
+                /* divider */
+                Rectangle()
+                    .fill(lightPurple)
+                    .frame(width: .infinity, height: 0.4, alignment: .center)
+                    .edgesIgnoringSafeArea(.all)
+                    .padding(.bottom, 2)
+                
+                /* Buttons container */
+                HStack(spacing: 10) {
                     /* Notification Button*/
                     Button(action : {
                         print("notification")
@@ -85,17 +108,19 @@ struct ContentView: View {
                             Image(systemName: "exclamationmark.circle.fill"
                             )
                             .foregroundColor(.red.opacity(0.8))
-                            Text("Notification")
+                            Text(" # Notifications")
                                 .foregroundStyle(.black)
                                 .font(.subheadline)
                         }
                         .padding()
-                        .frame(width: .infinity, height: 44)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 40)
                         .overlay(
                             RoundedRectangle(cornerRadius: 7)
                                 .stroke(Color.gray, lineWidth: 1)
                         )
-                        .background(Color.gray.opacity(0.1))
+                        .background(pastelPurple)
+                        
                         
                     }
                     
@@ -103,22 +128,33 @@ struct ContentView: View {
                     Button(action : {
                         print("notification")
                     }) {
-                        HStack {
+                        HStack(alignment: .center) {
                             Image(systemName: "bookmark.fill"
                             )
                             .foregroundColor(.gray.opacity(0.5))
-                            Spacer()
-                            Text("8")
+                          
+                            Text("#")
                                 .foregroundStyle(.gray)
                                 .font(.subheadline)
                         }
                         .padding()
-                        .frame(width: .infinity, height: 44)
+                        .frame(maxWidth: 100)
+                        .frame(height: 40)
                         .overlay(
                             RoundedRectangle(cornerRadius: 7)
                                 .stroke(Color.gray, lineWidth: 1)
                         )
                         .background(Color.gray.opacity(0.1))
+                        
+                    }
+                   
+                }
+                
+                /* End of buttons container */
+                
+                /* Details */
+                ScrollView(.vertical) {
+                    LazyVStack(){
                         
                     }
                 }
