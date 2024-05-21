@@ -10,9 +10,11 @@ import SwiftUI
 
 struct ContentView: View {
     
+    /* Types */
     struct Costume {
         var id: UUID
         var name: String
+        var quality: Int
     }
     
     /* Color Schemes */
@@ -20,13 +22,13 @@ struct ContentView: View {
     let purple = Color(red: 97/255, green: 77/255, blue: 150/255, opacity: 1.0)
     let pastelPurple = Color(red: 136/255, green: 121/255, blue: 176/255, opacity: 0.1)
     
-    /* Images */
+    /* Items */
     let costumes = [
-                    Costume(id: UUID(), name: "image 4"),
-                    Costume(id: UUID(), name: "image 5"),
-                    Costume(id: UUID(), name: "image 8"),
-                    Costume(id: UUID(), name: "image 10"),
-                    Costume(id: UUID(), name: "image 13")
+                    Costume(id: UUID(), name: "image 4", quality: 10),
+                    Costume(id: UUID(), name: "image 5", quality: 3),
+                    Costume(id: UUID(), name: "image 8", quality: 8),
+                    Costume(id: UUID(), name: "image 10", quality: 5),
+                    Costume(id: UUID(), name: "image 13", quality: 2)
                     ]
     
     var body: some View {
@@ -153,9 +155,31 @@ struct ContentView: View {
                 /* End of buttons container */
                 
                 /* Details */
-                ScrollView(.vertical) {
+                ScrollView {
                     LazyVStack(){
+                        ForEach(costumes, id: \.id) { costume in
                         
+                            HStack(spacing: 5) {
+                                Image(costume.name)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 100, height: 100)
+                                    .padding()
+                                Spacer()
+                                /* quality < 5 show low quality */
+                                Text(costume.quality < 5 ? Image(systemName: "exclamationmark.circle.fill") && "low supply" : "")
+                              
+
+                            }
+                            /*gray frame*/
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.gray, lineWidth: 0.5)
+                                    
+                            )
+                            .padding(2)
+                            .frame(maxWidth: .infinity)
+                        }
                     }
                 }
            }
