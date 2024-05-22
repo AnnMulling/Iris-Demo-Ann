@@ -17,6 +17,8 @@ struct ContentView: View {
         var quality: Int
     }
     
+   @State var lowSupply: Bool = false
+    
     /* Color Schemes */
     let lightPurple = Color(red: 176/255, green: 166/255, blue: 203/255, opacity: 1.0)
     let purple = Color(red: 97/255, green: 77/255, blue: 150/255, opacity: 1.0)
@@ -24,7 +26,7 @@ struct ContentView: View {
     
     /* Items */
     let costumes = [
-                    Costume(id: UUID(), name: "image 4", quality: 10),
+                    Costume(id: UUID(), name: "image 4", quality: 2),
                     Costume(id: UUID(), name: "image 5", quality: 3),
                     Costume(id: UUID(), name: "image 8", quality: 8),
                     Costume(id: UUID(), name: "image 10", quality: 5),
@@ -126,7 +128,7 @@ struct ContentView: View {
                         
                     }
                     
-                /* Star Button */
+                /* Bookmark Button */
                     Button(action : {
                         print("notification")
                     }) {
@@ -167,8 +169,43 @@ struct ContentView: View {
                                     .padding()
                                 Spacer()
                                 /* quality < 5 show low quality */
-                                Text(costume.quality < 5 ? Image(systemName: "exclamationmark.circle.fill") && "low supply" : "")
+                                LazyVStack(alignment: .leading){
+                                    (costume.quality < 5 ?
+                                         Text(Image(systemName: "exclamationmark.circle.fill" )) +
+                                         Text("low supply")
+                                     : Text(""))
+                                             .foregroundColor(.red.opacity(0.8))
+                                             .font(.subheadline)
+                                    HStack {
+                                        RoundedRectangle(cornerRadius: 25)
+                                            .fill(.green)
+                                            .frame(width: 50, height: 20)
+                                        Text("Color, Name")
+                                            .font(.headline)
+                                    }
+                                    Grid(alignment: .center) {
+                                        GridRow {
+                                            Text("25  34  18  22  45  40  13")
+                                                .font(.subheadline)
+                                        }
+                                        GridRow {
+                                            Text("S  M  L  XL  2X  3X  4X")
+                                                .font(.subheadline)
+                                                .foregroundColor(Color(.gray))
+                                        }
+                                    }
+                                    .padding(4)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.gray, lineWidth: 0.4)
+                                    )
+                                    
+                                    Text(costume.name)
+                                        .font(.subheadline)
+                                        .foregroundColor(Color(.gray))
+                                }
                               
+                                    
 
                             }
                             /*gray frame*/
@@ -177,7 +214,7 @@ struct ContentView: View {
                                     .stroke(Color.gray, lineWidth: 0.5)
                                     
                             )
-                            .padding(2)
+                            .padding(4)
                             .frame(maxWidth: .infinity)
                         }
                     }
