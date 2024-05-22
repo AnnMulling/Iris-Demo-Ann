@@ -14,7 +14,7 @@ struct ContentView: View {
     struct Costume {
         var id: UUID
         var name: String
-        var quality: Int
+        var counting: Int
     }
     
    @State var lowSupply: Bool = false
@@ -26,11 +26,11 @@ struct ContentView: View {
     
     /* Items */
     let costumes = [
-                    Costume(id: UUID(), name: "image 4", quality: 2),
-                    Costume(id: UUID(), name: "image 5", quality: 3),
-                    Costume(id: UUID(), name: "image 8", quality: 8),
-                    Costume(id: UUID(), name: "image 10", quality: 5),
-                    Costume(id: UUID(), name: "image 13", quality: 2)
+                    Costume(id: UUID(), name: "image 4", counting: 2),
+                    Costume(id: UUID(), name: "image 5", counting: 3),
+                    Costume(id: UUID(), name: "image 8", counting: 8),
+                    Costume(id: UUID(), name: "image 10", counting: 5),
+                    Costume(id: UUID(), name: "image 13", counting: 2)
                     ]
     
     var body: some View {
@@ -168,9 +168,9 @@ struct ContentView: View {
                                     .frame(width: 100, height: 100)
                                     .padding()
                                 Spacer()
-                                /* quality < 5 show low quality */
+                                /* counting < 5 show low supply */
                                 LazyVStack(alignment: .leading){
-                                    (costume.quality < 5 ?
+                                    (costume.counting < 5 ?
                                          Text(Image(systemName: "exclamationmark.circle.fill" )) +
                                          Text("low supply")
                                      : Text(""))
@@ -185,7 +185,7 @@ struct ContentView: View {
                                     }
                                     Grid(alignment: .center) {
                                         GridRow {
-                                            Text("25  34  18  22  45  40  13")
+                                            Text("25 34 18 22 45 40 13")
                                                 .font(.subheadline)
                                         }
                                         GridRow {
@@ -194,7 +194,7 @@ struct ContentView: View {
                                                 .foregroundColor(Color(.gray))
                                         }
                                     }
-                                    .padding(4)
+                                    .padding(5)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 5)
                                             .stroke(Color.gray, lineWidth: 0.4)
@@ -205,10 +205,9 @@ struct ContentView: View {
                                         .foregroundColor(Color(.gray))
                                 }
                               
-                                    
 
                             }
-                            /*gray frame*/
+                            /*gray frame details*/
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.gray, lineWidth: 0.5)
