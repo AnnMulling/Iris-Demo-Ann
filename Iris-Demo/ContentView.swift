@@ -10,6 +10,9 @@ import SwiftUI
 
 struct ContentView: View {
     
+    /* Side bar*/
+    @State private var isSideBarOpened = false
+    
     /* Types */
     struct Costume {
         var id: UUID
@@ -17,7 +20,6 @@ struct ContentView: View {
         var counting: Int
     }
     
-   @State var lowSupply: Bool = false
     
     /* Color Schemes */
     let lightPurple = Color(red: 176/255, green: 166/255, blue: 203/255, opacity: 1.0)
@@ -41,9 +43,25 @@ struct ContentView: View {
                 /* navigation bar*/
                
                 HStack(alignment: .center) {
-                   Image(systemName: "line.horizontal.3")
-                       .foregroundColor(purple)
-                       .imageScale(.large)
+                    /* sidebar */
+                    Button {
+                        isSideBarOpened.toggle()
+                        print(isSideBarOpened)
+                    } label: {
+                        Image(systemName: "line.horizontal.3")
+                            .foregroundColor(purple)
+                            .imageScale(.large)
+                    }
+                    
+                              
+                    /* sidebar view  */
+                    SideBar(isSidebarVisible: $isSideBarOpened)
+                    
+//                    {
+//                        Image(systemName: "line.horizontal.3")
+//                            .foregroundColor(purple)
+//                            .imageScale(.large)
+//                    }
                    Text("Home")
                        .foregroundColor(purple)
                    Spacer()
@@ -71,7 +89,6 @@ struct ContentView: View {
                                     Image(costume.name)
                                         .resizable()
                                         .scaledToFill()
-//                                        .background(Color(.white))
                                         .frame(width: 125, height: 110)
                                         .padding()
                                     Spacer()
