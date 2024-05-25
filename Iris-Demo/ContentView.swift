@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     
     /* Side bar*/
-    @State private var isSideBarOpened = false
+    @State private var isSideBarOpened: Bool = false
     
     /* Types */
     struct Costume {
@@ -36,41 +36,49 @@ struct ContentView: View {
                     ]
     
     var body: some View {
-        
-        ScrollView(.vertical){
-         
-            LazyVStack(spacing: 20) {
-                /* navigation bar*/
+
+//           VStack(spacing: 20) {
                
-                HStack(alignment: .center) {
-                    /* sidebar */
-                    Button {
-                        isSideBarOpened.toggle()
-                        print(isSideBarOpened)
-                    } label: {
-                        Image(systemName: "line.horizontal.3")
-                            .foregroundColor(purple)
-                            .imageScale(.large)
-                    }
-                    
-                              
-                    /* sidebar view  */
-                    SideBar(isSidebarVisible: $isSideBarOpened)
-                    
-//                    {
-//                        Image(systemName: "line.horizontal.3")
-//                            .foregroundColor(purple)
-//                            .imageScale(.large)
-//                    }
-                   Text("Home")
-                       .foregroundColor(purple)
-                   Spacer()
-                   Image(systemName: "gearshape")
-                       .foregroundColor(purple)
-                       .imageScale(.large)
-                       .foregroundStyle(.tint)
-                }
-        
+                /* navigation bar*/
+        ZStack {
+                   NavigationView {
+                       /* sidebar */
+                       Text("123")
+                           .toolbar {
+                               ToolbarItem (placement: .principal) {
+                                   HStack() {
+                                       /* hamburger toggle */
+                                       Button (action: {
+                                           isSideBarOpened.toggle()
+                                           print(isSideBarOpened)
+                                       }, label: {
+                                           Image(systemName: "line.horizontal.3")
+                                               .foregroundColor(purple)
+                                               .imageScale(.large)
+                                       })
+                                       
+                                       Spacer()
+                                       /* home */
+                                       Text("Home")
+                                           .foregroundColor(purple)
+                                      
+                                       /* gear */
+                                       Image(systemName: "gearshape")
+                                           .foregroundColor(purple)
+                                           .imageScale(.large)
+                                           .foregroundStyle(.tint)
+                                   }
+                                 
+                               }
+                               
+                           }
+                           
+                   }
+            /* sidebar view  */
+            SideBar(isSidebarVisible: $isSideBarOpened)
+                   
+               }
+               
                 /* divider */
                 Rectangle()
                     .fill(lightPurple)
@@ -78,7 +86,7 @@ struct ContentView: View {
                     .edgesIgnoringSafeArea(.all)
                     
             
-                
+
                 /* carousel */
                 ScrollView(.horizontal) {
                     LazyHStack(alignment: .center, spacing: 10) {
@@ -120,7 +128,7 @@ struct ContentView: View {
                     .padding(.bottom, 2)
                 
                 /* Buttons container */
-                HStack(spacing: 10) {
+        HStack(spacing: 10) {
                     /* Notification Button*/
                     Button(action : {
                         print("notification")
@@ -168,7 +176,7 @@ struct ContentView: View {
                         .background(Color.gray.opacity(0.1))
                         
                     }
-                   
+
                 }
                 
                 /* End of buttons container */
@@ -237,14 +245,13 @@ struct ContentView: View {
                 }
            }
             
-            .padding(.all)
+//            .padding(.all)
                    
-               }
-            
         }
+            
+//        }
    
-       
-}
+    
 
 #Preview {
     ContentView()

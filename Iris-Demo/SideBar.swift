@@ -21,5 +21,5 @@ struct SideBar: View {
 }
 
 //#Preview {
-//   SideBar(isSidebarVisible: <#T##Binding<Bool>#>)
+//   SideBar(isSidebarVisible)
 //}
