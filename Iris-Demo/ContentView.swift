@@ -37,39 +37,41 @@ struct ContentView: View {
     
     var body: some View {
 
-//           VStack(spacing: 20) {
+           VStack(spacing: 20) {
                
                 /* navigation bar*/
         ZStack {
                    NavigationView {
-                       /* sidebar */
-                       Text("123")
-                           .toolbar {
-                               ToolbarItem (placement: .principal) {
-                                   HStack() {
-                                       /* hamburger toggle */
-                                       Button (action: {
-                                           isSideBarOpened.toggle()
-                                           print(isSideBarOpened)
-                                       }, label: {
-                                           Image(systemName: "line.horizontal.3")
-                                               .foregroundColor(purple)
-                                               .imageScale(.large)
-                                       })
-                                       
-                                       Spacer()
-                                       /* home */
-                                       Text("Home")
-                                           .foregroundColor(purple)
-                                      
-                                       /* gear */
-                                       Image(systemName: "gearshape")
-                                           .foregroundColor(purple)
-                                           .imageScale(.large)
-                                           .foregroundStyle(.tint)
-                                   }
-                                 
-                               }
+          
+                /* sidebar */
+                Text("123")
+                    .toolbar {
+                        ToolbarItem (placement: .principal) {
+                            HStack() {
+                                /* hamburger toggle */
+                                Button (action: {
+                                    isSideBarOpened.toggle()
+                                    print(isSideBarOpened)
+                                }, label: {
+                                    Image(systemName: "line.horizontal.3")
+                                        .foregroundColor(purple)
+                                        .imageScale(.large)
+                                })
+                                
+                                Spacer()
+                                /* home */
+                                Text("Home")
+                                    .foregroundColor(purple)
+                                
+                                /* gear */
+                                Image(systemName: "gearshape")
+                                    .foregroundColor(purple)
+                                    .imageScale(.large)
+                                    .foregroundStyle(.tint)
+                            }
+                            
+                        }
+                    
                                
                            }
                            
@@ -249,7 +251,7 @@ struct ContentView: View {
                    
         }
             
-//        }
+        }
    
     
 
