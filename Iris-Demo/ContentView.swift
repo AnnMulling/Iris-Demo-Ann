@@ -37,49 +37,56 @@ struct ContentView: View {
     
     var body: some View {
 
+        ZStack {
+            
+            GeometryReader { _ in
+                EmptyView()
+            }
+            .background(Color.red.opacity(0.6))
+            .opacity(isSideBarOpened ? 1 : 0)
            VStack(spacing: 20) {
                
                 /* navigation bar*/
-        ZStack {
-                   NavigationView {
-          
-                /* sidebar */
-                Text("123")
-                    .toolbar {
-                        ToolbarItem (placement: .principal) {
-                            HStack() {
-                                /* hamburger toggle */
-                                Button (action: {
-                                    isSideBarOpened.toggle()
-                                    print(isSideBarOpened)
-                                }, label: {
-                                    Image(systemName: "line.horizontal.3")
-                                        .foregroundColor(purple)
-                                        .imageScale(.large)
-                                })
-                                
-                                Spacer()
-                                /* home */
-                                Text("Home")
-                                    .foregroundColor(purple)
-                                
-                                /* gear */
-                                Image(systemName: "gearshape")
-                                    .foregroundColor(purple)
-                                    .imageScale(.large)
-                                    .foregroundStyle(.tint)
-                            }
-                            
-                        }
-                    
-                               
-                           }
-                           
-                   }
-            /* sidebar view  */
-            SideBar(isSidebarVisible: $isSideBarOpened)
+                   //Dimmed background
                    
-               }
+                   VStack {
+//                           .toolbar {
+//                               ToolbarItem (placement: .principal) {
+                                   HStack() {
+                                       /* hamburger toggle */
+                                       Button (action: {
+                                           isSideBarOpened.toggle()
+                                           print(isSideBarOpened)
+                                       }, label: {
+                                           Image(systemName: "line.horizontal.3")
+                                               .foregroundColor(purple)
+                                               .imageScale(.large)
+                                       })
+                                       
+                                       Spacer()
+                                       /* home */
+                                       Text("Home")
+                                           .foregroundColor(purple)
+                                       
+                                       /* gear */
+                                       Image(systemName: "gearshape")
+                                           .foregroundColor(purple)
+                                           .imageScale(.large)
+                                           .foregroundStyle(.tint)
+                                   }
+                                   
+//                               }
+                                                           
+//                           }
+//                       
+                       }
+                   /* sidebar view  */
+                   SideBar(isSidebarVisible: $isSideBarOpened)
+                       
+              
+       
+                   
+              
                
                 /* divider */
                 Rectangle()
@@ -119,7 +126,7 @@ struct ContentView: View {
                             }
                     }
                     
-                    .padding(5)
+//                    .padding(.all)
                 }
                 
                 /* divider */
@@ -247,12 +254,12 @@ struct ContentView: View {
                 }
            }
             
-//            .padding(.all)
+            .padding(.all)
                    
         }
             
         }
-   
+}
     
 
 #Preview {
