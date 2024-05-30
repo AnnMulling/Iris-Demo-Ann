@@ -22,9 +22,15 @@ struct ContentView: View {
     
     
     /* Color Schemes */
-    let lightPurple = Color(red: 176/255, green: 166/255, blue: 203/255, opacity: 1.0)
-    let purple = Color(red: 97/255, green: 77/255, blue: 150/255, opacity: 1.0)
-    let pastelPurple = Color(red: 136/255, green: 121/255, blue: 176/255, opacity: 0.1)
+//    let lightPurple = Color(red: 176/255, green: 166/255, blue: 203/255, opacity: 1.0)
+//    let purple = Color(red: 97/255, green: 77/255, blue: 150/255, opacity: 1.0)
+//    let pastelPurple = Color(red: 136/255, green: 121/255, blue: 176/255, opacity: 0.1)
+    
+    /* Color Schemes
+        -light_purple
+        -medium_purple
+        -dark_purple
+    */
     
     /* Items */
     let costumes = [
@@ -44,12 +50,17 @@ struct ContentView: View {
             }
             .background(Color.red.opacity(0.6))
             .opacity(isSideBarOpened ? 1 : 0)
-           VStack(spacing: 20) {
+            .animation(.easeInOut.delay(0.01), value: isSideBarOpened)
+            .onTapGesture {
+                        isSideBarOpened.toggle()
+                    }
+            
+            VStack(spacing: 20) {
                
                 /* navigation bar*/
                    //Dimmed background
                    
-                   VStack {
+//                   VStack {
 //                           .toolbar {
 //                               ToolbarItem (placement: .principal) {
                                    HStack() {
@@ -59,18 +70,18 @@ struct ContentView: View {
                                            print(isSideBarOpened)
                                        }, label: {
                                            Image(systemName: "line.horizontal.3")
-                                               .foregroundColor(purple)
+                                               .foregroundColor(Color("dark_purple"))
                                                .imageScale(.large)
                                        })
                                        
                                        Spacer()
                                        /* home */
                                        Text("Home")
-                                           .foregroundColor(purple)
+                                           .foregroundColor(Color("dark_purple"))
                                        
                                        /* gear */
                                        Image(systemName: "gearshape")
-                                           .foregroundColor(purple)
+                                           .foregroundColor(Color("dark_purple"))
                                            .imageScale(.large)
                                            .foregroundStyle(.tint)
                                    }
@@ -78,19 +89,21 @@ struct ContentView: View {
 //                               }
                                                            
 //                           }
-//                       
-                       }
-                   /* sidebar view  */
-                   SideBar(isSidebarVisible: $isSideBarOpened)
+//
+//                       }
+               
+
+                    
+                    SideBar(
+                        isSidebarVisible: $isSideBarOpened
                        
-              
-       
-                   
+                    )
+            
               
                
                 /* divider */
                 Rectangle()
-                    .fill(lightPurple)
+                    .fill(Color("light_purple"))
                     .frame(width: .infinity, height: 0.4, alignment: .center)
                     .edgesIgnoringSafeArea(.all)
                     
@@ -131,7 +144,7 @@ struct ContentView: View {
                 
                 /* divider */
                 Rectangle()
-                    .fill(lightPurple)
+                    .fill(Color("light_purple"))
                     .frame(width: .infinity, height: 0.4, alignment: .center)
                     .edgesIgnoringSafeArea(.all)
                     .padding(.bottom, 2)
@@ -157,7 +170,7 @@ struct ContentView: View {
                             RoundedRectangle(cornerRadius: 7)
                                 .stroke(Color.gray, lineWidth: 1)
                         )
-                        .background(pastelPurple)
+                        .background(Color.gray.opacity(0.1))
                         
                         
                     }
@@ -258,7 +271,9 @@ struct ContentView: View {
                    
         }
             
+      
         }
+        
 }
     
 
