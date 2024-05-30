@@ -54,9 +54,8 @@ struct ContentView: View {
             Rectangle()
                 .fill(Color("light_purple"))
                 .frame(width: .infinity, height: 0.4, alignment: .center)
-               
-                .edgesIgnoringSafeArea(.all)
-                
+                .padding(.top, 30.0)
+
             
 
                 /* carousel */
@@ -96,8 +95,7 @@ struct ContentView: View {
                 Rectangle()
                     .fill(Color("light_purple"))
                     .frame(width: .infinity, height: 0.4, alignment: .center)
-                    .edgesIgnoringSafeArea(.all)
-                    .padding(.bottom, 2)
+                    .padding(.vertical, 6.0)
                 
                 /* Buttons container */
                 HStack(spacing: 10) {
