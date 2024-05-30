@@ -43,70 +43,20 @@ struct ContentView: View {
     
     var body: some View {
 
-        ZStack {
-            
-            GeometryReader { _ in
-                EmptyView()
-            }
-            .background(Color.red.opacity(0.6))
-            .opacity(isSideBarOpened ? 1 : 0)
-            .animation(.easeInOut.delay(0.01), value: isSideBarOpened)
-            .onTapGesture {
-                        isSideBarOpened.toggle()
-                    }
-            
-            VStack(spacing: 20) {
-               
-                /* navigation bar*/
-                   //Dimmed background
-                   
-//                   VStack {
-//                           .toolbar {
-//                               ToolbarItem (placement: .principal) {
-                                   HStack() {
-                                       /* hamburger toggle */
-                                       Button (action: {
-                                           isSideBarOpened.toggle()
-                                           print(isSideBarOpened)
-                                       }, label: {
-                                           Image(systemName: "line.horizontal.3")
-                                               .foregroundColor(Color("dark_purple"))
-                                               .imageScale(.large)
-                                       })
-                                       
-                                       Spacer()
-                                       /* home */
-                                       Text("Home")
-                                           .foregroundColor(Color("dark_purple"))
-                                       
-                                       /* gear */
-                                       Image(systemName: "gearshape")
-                                           .foregroundColor(Color("dark_purple"))
-                                           .imageScale(.large)
-                                           .foregroundStyle(.tint)
-                                   }
-                                   
-//                               }
-                                                           
-//                           }
-//
-//                       }
-               
 
-                    
-                    SideBar(
-                        isSidebarVisible: $isSideBarOpened
-                       
-                    )
-            
-              
+        ZStack {
+           
+            /* navigation bar*/
+            NavView ( isSidebarVisible: $isSideBarOpened )
+            SideBar(isSidebarVisible: $isSideBarOpened )
+            VStack(spacing: 20) {
+            /* divider */
+            Rectangle()
+                .fill(Color("light_purple"))
+                .frame(width: .infinity, height: 0.4, alignment: .center)
                
-                /* divider */
-                Rectangle()
-                    .fill(Color("light_purple"))
-                    .frame(width: .infinity, height: 0.4, alignment: .center)
-                    .edgesIgnoringSafeArea(.all)
-                    
+                .edgesIgnoringSafeArea(.all)
+                
             
 
                 /* carousel */
@@ -114,12 +64,12 @@ struct ContentView: View {
                     LazyHStack(alignment: .center, spacing: 10) {
                             ForEach(costumes, id: \.id) { costume in
                             
-                                VStack(alignment: .center, spacing: 5) {
+                                VStack(alignment: .center, spacing: 2) {
                                     Spacer()
                                     Image(costume.name)
                                         .resizable()
                                         .scaledToFill()
-                                        .frame(width: 125, height: 110)
+                                        .frame(width: 150, height: 50.0)
                                         .padding()
                                     Spacer()
                                     Text("\(costume.name)")
@@ -150,7 +100,7 @@ struct ContentView: View {
                     .padding(.bottom, 2)
                 
                 /* Buttons container */
-        HStack(spacing: 10) {
+                HStack(spacing: 10) {
                     /* Notification Button*/
                     Button(action : {
                         print("notification")
@@ -267,11 +217,10 @@ struct ContentView: View {
                 }
            }
             
-            .padding(.all)
+                .padding(.all)
                    
-        }
-            
-      
+            }
+
         }
         
 }
