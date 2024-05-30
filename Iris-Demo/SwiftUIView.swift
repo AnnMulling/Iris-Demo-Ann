@@ -37,6 +37,17 @@ struct NavigationView: View {
                             .imageScale(.large)
                     })
                 }
+                ToolbarItem(placement: .topBarTrailing){
+                    Button(action: {
+                        print("show edit view")
+                    }, label: {
+                        Image(systemName: "gearshape")
+                            .foregroundColor(Color("dark_purple"))
+                            .imageScale(.large)
+                            .foregroundStyle(.tint)
+                    })
+                    
+                }
             }
         }
     }
