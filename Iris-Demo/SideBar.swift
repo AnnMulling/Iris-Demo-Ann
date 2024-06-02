@@ -31,7 +31,7 @@ struct SideBar: View {
                         Text("outgoing")
                         Text("Setting")
                         Text("Help")
-                            .background(Color.white)
+                        .background(Color.white)
                     }
                     //right view
                     //                NavigationStack {
